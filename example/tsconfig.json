@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2017",
+    "rootDir": "./src/",
+    "outDir": "./lib",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "plugins": [
+      {
+        "name": "../../type-elasticsearch-plugin",
+        "tags": [
+          "esClient"
+        ]
+      }
+    ]
+  },
+  "exclude": ["*/__tests__/**"]
+}
