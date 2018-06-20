@@ -24,6 +24,7 @@ export = (modules: {typescript: typeof ts_module}) => {
 
     // Remove specified entries from completion list
     proxy.getCompletionsAtPosition = (fileName, position) => {
+
       info.project.projectService.logger.info(`getCompletionsAtPosition ${fileName} ,  ${position}`);
       const prior = info.languageService.getCompletionsAtPosition(fileName, position,undefined);
       const oldLength = prior.entries.length;
@@ -35,6 +36,7 @@ export = (modules: {typescript: typeof ts_module}) => {
       }
 
       return prior;
+
     };
 
     return proxy;

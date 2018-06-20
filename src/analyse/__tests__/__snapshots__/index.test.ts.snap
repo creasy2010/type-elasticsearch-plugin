@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`空字符串时给出提示 1`] = `
+Array [
+  Object {
+    "comment": "商品搜索提示作为关键词智能提示。",
+    "insertText": "/suggests/:adminId?",
+    "name": "/suggests/",
+  },
+  Object {
+    "comment": "根据查询条件查询商品SPU信息和SPU聚合结果。",
+    "insertText": "/search/:adminId?",
+    "name": "/search/",
+  },
+  Object {
+    "comment": "根据查询条件查询商品SPU信息和SPU聚合结果。",
+    "insertText": "/spu_search/:adminId?",
+    "name": "/spu_search/",
+  },
+  Object {
+    "comment": "根据查询条件聚合商品SKU信息。",
+    "insertText": "/search/:adminId?",
+    "name": "/search/",
+  },
+  Object {
+    "comment": "根据查询条件聚合商品SKU信息。",
+    "insertText": "/spu_aggregations/:adminId?",
+    "name": "/spu_aggregations/",
+  },
+  Object {
+    "comment": "根据查询条件聚合商品SKU信息。",
+    "insertText": "/aggregations/:adminId?",
+    "name": "/aggregations/",
+  },
+  Object {
+    "comment": "根据查询条件查询SKU，但是结果聚合成SPU的方式",
+    "insertText": "/products/:adminId?",
+    "name": "/products/",
+  },
+  Object {
+    "comment": "商品SPU查询,根据指定的查询条件返回符合条件商品，支持分页和排序。",
+    "insertText": "/spus/:adminId?",
+    "name": "/spus/",
+  },
+  Object {
+    "comment": "商品SKU查询,根据指定的查询条件返回符合条件商品，支持分页和排序。",
+    "insertText": "/products/:adminId?",
+    "name": "/products/",
+  },
+]
+`;
+
+exports[`空字符串时给出提示 2`] = `
+Array [
+  Object {
+    "comment": "搜索关键词",
+    "insertText": "q=",
+    "name": "q",
+  },
+  Object {
+    "comment": "基础查询条件，不同查询条件之间用\\";\\"分割，同一查询条件下的值支持多选，用\\",\\"分割；eg:basic=brand:华为,小米;price:-1000,1500-2500,4000-",
+    "insertText": "basic=",
+    "name": "basic",
+  },
+  Object {
+    "comment": "商品类目路径，格式为：\\"b2c,手机,手机数码\\"",
+    "insertText": "cats=",
+    "name": "cats",
+  },
+  Object {
+    "comment": "商品属性，格式同basic参数，为： \\"网络:移动4g,联通4g;颜色:白色,黑色\\"",
+    "insertText": "prop=",
+    "name": "prop",
+  },
+  Object {
+    "comment": "起始条数，非分页数，默认为0，最大为6000",
+    "insertText": "from=",
+    "name": "from",
+  },
+  Object {
+    "comment": "查询条数，默认为60，最大为200",
+    "insertText": "size=",
+    "name": "size",
+  },
+  Object {
+    "comment": "对搜索结果进行排序，可不填，默认值为匹配得分降序，即_score:0。1表示升序、0表示降序，支持多个排序字段。格式为：\\"stock:1;price:0\\"，表示首先按照库存升序，然后按照价格降序对搜索结果进行排序",
+    "insertText": "sort=",
+    "name": "sort",
+  },
+  Object {
+    "comment": "返回数据的格式，支持json、xml、yaml，默认json；也可以在HTTP header accept参数中指定返回消息格式",
+    "insertText": "format=",
+    "name": "format",
+  },
+  Object {
+    "comment": "用于开启或关闭自营商品查询过滤，为1表示仅查询自营商品，为0表示查询所有的商品，默认值为1",
+    "insertText": "ownerFilter=",
+    "name": "ownerFilter",
+  },
+  Object {
+    "comment": "用于开启或关闭自营商品查询过滤，为1表示仅查询自营商品，为0表示查询所有的商品，默认值为1",
+    "insertText": "scene=",
+    "name": "scene",
+  },
+]
+`;

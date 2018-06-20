@@ -8,13 +8,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "plugins": [
-      {
-        "name": "../../type-elasticsearch-plugin",
-        "tags": [
-          "esClient"
-        ]
+    {
+        "name": "type-elasticsearch-plugin"
       }
     ]
-  },
-  "exclude": ["*/__tests__/**"]
+  }
 }

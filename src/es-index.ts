@@ -8,60 +8,72 @@
  **/
 
 import ts from 'typescript/lib/tsserverlibrary';
-import fse from 'fs-extra'
-import { decorateWithTemplateLanguageService } from 'typescript-template-language-service-decorator';
+import {getCompleteEntry} from './analyse';
+import {
+  TemplateLanguageService,
+  TemplateContext,decorateWithTemplateLanguageService} from 'typescript-template-language-service-decorator';
 
 
-
-export = (mod: { typescript: typeof ts }) => {
+export = (mod: {typescript: typeof ts}) => {
   return {
     create(info: ts.server.PluginCreateInfo): ts.LanguageService {
-      info.project.log('esClient:****12312321312312312312312312312');
       return decorateWithTemplateLanguageService(
         mod.typescript,
         info.languageService,
         new EchoTemplateLanguageService(info),
-        { tags: ['esClient'] });
-    }
+        {tags: ['esClient']},{
+          logger:{log : (msg) => {
+              console.log(msg);
+              // info.project.projectService.logger.info('esClient:****'+msg);
+            }}
+        }
+      );
+    },
   };
 };
 
-import { TemplateLanguageService, TemplateContext } from 'typescript-template-language-service-decorator';
 
+/**
+ * 处理逻辑
+ *
+ * ?q=apple&from=0&size=2
+ *
+ * 1.空行时
+ */
 class EchoTemplateLanguageService implements TemplateLanguageService {
-
-  constructor(info: ts.server.PluginCreateInfo){
-    this._info= info;
+  constructor(info: ts.server.PluginCreateInfo) {
+    this._info = info;
     this.log('EchoTemplateLanguageService 初始化;;');
-    // setInterval(()=>{this.log('定时任务log')},1000);
   }
 
-  _info :ts.server.PluginCreateInfo;
+  _info: ts.server.PluginCreateInfo;
 
-  log(string){
-    this._info.project.log("esClient:"+string);
-  };
+  log(string) {
+    this._info.project.projectService.logger.info('esClient:' + string);
+  }
 
   getCompletionsAtPosition(
     context: TemplateContext,
-    position: ts.LineAndCharacter
+    position: ts.LineAndCharacter,
   ): ts.CompletionInfo {
-    const line = context.text.split(/\n/g)[position.line];
-    fse.writeFileSync('/Users/dong/workbench/qmfe/type-elasticsearch-plugin/log.txt','调用了一次');
-
     this.log(`getCompletionsAtPosition:: ${context}  --- ${position}`);
+
+    let entries:ts.CompletionEntry[] =getCompleteEntry(context.text,context.toOffset(position)).map(entryItem=>{
+
+      return  {
+        name: entryItem.name,
+        insertText:entryItem.insertText,
+        kind: ts.ScriptElementKind.unknown,
+        kindModifiers: 'esClient',
+        sortText:entryItem.name
+      }
+    });
+
     return {
       isGlobalCompletion: false,
       isMemberCompletion: false,
       isNewIdentifierLocation: false,
-      entries: [
-        {
-          name: line.slice(0, position.character),
-          kind: ts.ScriptElementKind.keyword,
-          kindModifiers: 'echo',
-          sortText: 'echo'
-        }
-      ]
+      entries,
     };
   }
 }
