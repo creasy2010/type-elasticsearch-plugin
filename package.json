@@ -1,6 +1,6 @@
 {
   "name": "type-elasticsearch-plugin",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "typescript language service for egg ",
   "main": "lib/es-index.js",
   "scripts": {

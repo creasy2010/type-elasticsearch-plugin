@@ -8,9 +8,10 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "plugins": [
-    {
+      {
         "name": "type-elasticsearch-plugin"
       }
     ]
-  }
+  },
+  "exclude": ["log.log"]
 }

@@ -6,8 +6,7 @@
  * @company qianmi.com
  * @Date    2018/6/19
  **/
-//
-import {esClient} from './es-client';
+import { esClient } from './es-client';
 
 // export function esClient(string1){
 //   console.log(string1);
@@ -16,16 +15,4 @@ import {esClient} from './es-client';
 
 import styled from 'styled-components';
 
-styled.button`
-border:sfsdf
-123123123 123123 123123
-color: blue;
-`;
-
-esClient`
-q
-1231
-s
-color
-123123
-`;
+let a = esClient"asdfadfsdfsfasdasdfwerwcvcxhtradfsdfsdfsdfsdfsdfsdfsdasdasdfsdf,";
