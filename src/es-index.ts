@@ -8,30 +8,33 @@
  **/
 
 import ts from 'typescript/lib/tsserverlibrary';
-import {getCompleteEntry} from './analyse';
+import { getCompleteEntry } from './analyse';
 import {
   TemplateLanguageService,
-  TemplateContext,decorateWithTemplateLanguageService} from 'typescript-template-language-service-decorator';
+  TemplateContext,
+  decorateWithTemplateLanguageService
+} from 'typescript-template-language-service-decorator';
 
-
-export = (mod: {typescript: typeof ts}) => {
+export = (mod: { typescript: typeof ts }) => {
   return {
     create(info: ts.server.PluginCreateInfo): ts.LanguageService {
       return decorateWithTemplateLanguageService(
         mod.typescript,
         info.languageService,
         new EchoTemplateLanguageService(info),
-        {tags: ['esClient']},{
-          logger:{log : (msg) => {
+        { tags: ['esClient'] },
+        {
+          logger: {
+            log: msg => {
               console.log(msg);
               // info.project.projectService.logger.info('esClient:****'+msg);
-            }}
+            }
+          }
         }
       );
-    },
+    }
   };
 };
-
 
 /**
  * 处理逻辑
@@ -54,26 +57,27 @@ class EchoTemplateLanguageService implements TemplateLanguageService {
 
   getCompletionsAtPosition(
     context: TemplateContext,
-    position: ts.LineAndCharacter,
+    position: ts.LineAndCharacter
   ): ts.CompletionInfo {
     this.log(`getCompletionsAtPosition:: ${context}  --- ${position}`);
-
-    let entries:ts.CompletionEntry[] =getCompleteEntry(context.text,context.toOffset(position)).map(entryItem=>{
-
-      return  {
+    let entries: ts.CompletionEntry[] = getCompleteEntry(
+      context.text,
+      context.toOffset(position)
+    ).map(entryItem => {
+      return {
         name: entryItem.name,
-        insertText:entryItem.insertText,
+        insertText: entryItem.insertText,
         kind: ts.ScriptElementKind.unknown,
         kindModifiers: 'esClient',
-        sortText:entryItem.name
-      }
+        sortText: entryItem.name
+      };
     });
 
     return {
       isGlobalCompletion: false,
       isMemberCompletion: false,
       isNewIdentifierLocation: false,
-      entries,
+      entries
     };
   }
 }

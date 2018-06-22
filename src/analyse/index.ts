@@ -8,6 +8,7 @@
  **/
 
 import {types} from './search-type';
+import {parseContent, getPosition, IPosition} from "./util";
 
 export interface ICompletionEntry {
   name: string;
@@ -23,76 +24,56 @@ export interface ICompletionEntry {
  */
 export function getCompleteEntry(
   content: string,
-  offset: number,
+  offset: number
 ): ICompletionEntry[] {
-  //内容为空时处理
-  if (content.trim().length === 0) {
-    return types.map(typeItem => {
-      return {
-        name: typeItem.begin,
-        insertText: typeItem.beginReplace+"?",
-        comment: typeItem.comment,
-      };
-    });
-  }
-
   let result: ICompletionEntry[] = [];
   let urlAst = parseContent(content.trim());
+  let position:IPosition = getPosition(urlAst,offset);
 
   //判断 是什么类型的
-  let hitTypes = types.filter(searchTypeItem => urlAst.begin.startsWith(searchTypeItem.begin));
-
-  // let paramItemIndex= preStr.lastIndexOf("&");
-  // let paramIndex= preStr.lastIndexOf("?");
-  // let equalIndex= preStr.lastIndexOf("=");
-  //TODO 根据所在位置添加 不同信息
+  let hitTypes = types.filter(searchTypeItem =>
+    searchTypeItem.begin.startsWith(urlAst.begin)
+  );
 
 
-  let preStr = content.substring(0, offset + 1);
-  let storedName = [];
-  hitTypes.forEach(searchTypeItem=>{
-    searchTypeItem.searchParamsRule.forEach(ruleItem=>{
-      if(!storedName.includes(ruleItem.name)) {
-        result.push({
-          name:ruleItem.name,
-          insertText:ruleItem.name+"=",
-          comment:ruleItem.comment
-        })
-        storedName.push(ruleItem.name);
-      }
+  console.log(`position:${JSON.stringify(position)},urlAst:${JSON.stringify(urlAst)},hitTypes.length:${hitTypes.length},offset:${offset}`);
+  if(position.type === 'begin') {
+    if(hitTypes.length>0) {
+      return hitTypes.map(typeItem => {
+        return {
+          name: typeItem.begin,
+          insertText: typeItem.beginReplace + '?',
+          comment: typeItem.comment
+        };
+      });
+    } else {
+      //内容对不上时 全部返回. ;;
+      return types.map(typeItem => {
+        return {
+          name: typeItem.begin,
+          insertText: typeItem.beginReplace + '?',
+          comment: typeItem.comment
+        };
+      });
+    }
+
+  } else if(position.type === 'param') {
+
+    let storedName = [];
+    hitTypes.forEach(searchTypeItem => {
+      //把类型中的查询参数取出来
+      searchTypeItem.searchParamsRule.forEach(ruleItem => {
+        if (!storedName.includes(ruleItem.name)) {
+          result.push({
+            name: ruleItem.name,
+            insertText: ruleItem.name + '=',
+            comment: ruleItem.comment
+          });
+          storedName.push(ruleItem.name);
+        }
+      });
     })
-  })
-
+  }
 
   return result;
-}
-
-//TODO 应该解析为ast进行分析;
-
-/// q=apple& 与  cats='a,b,c' 如何区分?
-export interface IUrlContent {
-  begin: string; ///products/A967550
-  params: {
-    [name: string]: string;
-  };
-}
-/**
-  /products/A967550?q=apple&from=0&size=2
-
-
- * @param {string} content
- */
-function parseContent(content: string): IUrlContent {
-  let temp = content.trim().split('?');
-  let begin = temp[0];
-  let params = {};
-  temp[1].split('&').forEach(paramItem => {
-    temp = paramItem.split('=');
-    params[temp[0]] = temp[1];
-  });
-
-  return {
-    begin,
-    params,
-  };
 }
