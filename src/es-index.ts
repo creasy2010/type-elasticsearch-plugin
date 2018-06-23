@@ -59,7 +59,8 @@ class EchoTemplateLanguageService implements TemplateLanguageService {
     context: TemplateContext,
     position: ts.LineAndCharacter
   ): ts.CompletionInfo {
-    this.log(`getCompletionsAtPosition:: ${context}  --- ${position}`);
+    this.log(`getCompletionsAtPosition:: position:${JSON.stringify(position)} offSet:${context.toOffset(position)} ${context.text}  --- `);
+
     let entries: ts.CompletionEntry[] = getCompleteEntry(
       context.text,
       context.toOffset(position)
@@ -67,11 +68,14 @@ class EchoTemplateLanguageService implements TemplateLanguageService {
       return {
         name: entryItem.name,
         insertText: entryItem.insertText,
-        kind: ts.ScriptElementKind.unknown,
+        kind: ts.ScriptElementKind.keyword,
         kindModifiers: 'esClient',
-        sortText: entryItem.name
+        sortText: '0'
       };
     });
+
+
+    this.log(`getCompletionsAtPosition:${JSON.stringify(entries)}`);
 
     return {
       isGlobalCompletion: false,

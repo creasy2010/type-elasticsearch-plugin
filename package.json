@@ -1,8 +1,8 @@
 {
   "name": "type-elasticsearch-plugin",
-  "version": "0.0.5",
+  "version": "0.0.13",
   "description": "typescript language service for egg ",
-  "main": "lib/es-index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "jest --verbose --watch -u"
   },

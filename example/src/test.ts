@@ -13,8 +13,7 @@ export function esClient(string1) {
 }
 // let a  =12312;
 
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
-styled.button``;
-
-let a = esClient`qweqweqweqwe`;
+// styled.button`1123`;
+let a = esClient`/sdfsdf`;

@@ -52,13 +52,16 @@ export = (modules: {typescript: typeof ts_module}) => {
         return {
           name: entryItem.name,
           insertText: entryItem.insertText,
-          kind: ts.ScriptElementKind.unknown,
+          kind: ts.ScriptElementKind.keyword,
           kindModifiers: 'esClient',
           sortText: '0',
         };
       });
       prior.entries = entries.concat(prior.entries);
 
+      info.project.projectService.logger.info(
+        `esClient: getCompletionsAtPosition 返回值 ${JSON.stringify(prior)}`,
+      );
       return prior;
     };
     //
