@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "type-elasticsearch-plugin": "0.0.0",
+    "type-elasticsearch-plugin": "0.0.14",
     "typescript": "^2.9.2",
     "typescript-styled-plugin": "^0.6.3"
   },

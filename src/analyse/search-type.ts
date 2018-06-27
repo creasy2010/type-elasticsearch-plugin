@@ -88,21 +88,21 @@ const basicRuels: ISearchParamRule[] = [
 //2.查询参数
 
 let skuSearch: ISearchType = {
-  begin: '/products/',
+  begin: 'products',
   beginReplace: '/products/:adminId',
   searchParamsRule: basicRuels.concat([]),
   comment: '商品SKU查询,根据指定的查询条件返回符合条件商品，支持分页和排序。',
 };
 
 let spuSearch: ISearchType = {
-  begin: '/spus/',
+  begin: 'spus',
   beginReplace: '/spus/:adminId',
   searchParamsRule: basicRuels.concat([]),
   comment: '商品SPU查询,根据指定的查询条件返回符合条件商品，支持分页和排序。',
 };
 
 let sku4spuSearch: ISearchType = {
-  begin: '/products/',
+  begin: 'products',
   beginReplace: '/products/:adminId',
   searchParamsRule: basicRuels.concat([
     {
@@ -126,14 +126,14 @@ const skuAggRule = basicRuels.concat([
 ]);
 
 let agg4sku: ISearchType = {
-  begin: '/aggregations/',
+  begin: 'aggregations',
   beginReplace: '/aggregations/:adminId',
   searchParamsRule: skuAggRule,
   comment: '根据查询条件聚合商品SKU信息。',
 };
 
 let agg4spu: ISearchType = {
-  begin: '/spu_aggregations/',
+  begin: 'spu_aggregations',
   beginReplace: '/spu_aggregations/:adminId',
   searchParamsRule: skuAggRule,
   comment: '根据查询条件聚合商品SKU信息。',
@@ -150,21 +150,21 @@ const searchRule = basicRuels.concat([
 ]);
 
 let searchSku: ISearchType = {
-  begin: '/search/',
+  begin: 'search',
   beginReplace: '/search/:adminId',
   searchParamsRule: searchRule,
   comment: '根据查询条件聚合商品SKU信息。',
 };
 
 let searchSpu: ISearchType = {
-  begin: '/spu_search/',
+  begin: 'spu_search',
   beginReplace: '/spu_search/:adminId',
   searchParamsRule: searchRule,
   comment: '根据查询条件查询商品SPU信息和SPU聚合结果。',
 };
 
 let searchSku4Spu: ISearchType = {
-  begin: '/search/',
+  begin: 'search',
   beginReplace: '/search/:adminId',
   searchParamsRule: searchRule.concat([
     {
@@ -178,7 +178,7 @@ let searchSku4Spu: ISearchType = {
 };
 
 let suggestGoods: ISearchType = {
-  begin: '/suggests/',
+  begin: 'suggests',
   beginReplace: '/suggests/:adminId',
   searchParamsRule: [
     {name: 'q', type: ValueTypeEnum.string, comment: '搜索关键词', isRequire: true},

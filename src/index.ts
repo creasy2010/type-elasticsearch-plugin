@@ -11,7 +11,7 @@ export = (modules: {typescript: typeof ts_module}) => {
     // Get a list of things to remove from the completion list from the config object.
     // If nothing was specified, we'll just remove 'caller'
     info.project.projectService.logger.info(
-      "I'm getting set up now! Check the log for this message.",
+      "I'm getting set up now! Check the log for this message.processID:"+process.pid
     );
 
     // Set up decorator
@@ -44,20 +44,48 @@ export = (modules: {typescript: typeof ts_module}) => {
         position,
         undefined,
       );
+      //
+      // let entries: ts.CompletionEntry[] = getCompleteEntry(
+      //   '',
+      //   0,
+      // ).filter(entryItem=>{
+      //   let ok=['suggests','search','spu_search'];
+      //   return ok.includes( entryItem.name)
+      // }).map(entryItem => {
+      //   return {
+      //     name: entryItem.name,
+      //     insertText: entryItem.insertText,
+      //     kind: ts.ScriptElementKind.keyword,
+      //     kindModifiers: '',
+      //     sortText: '0',
+      //   };
+      // });
+      //
+      // prior.entries = entries;
 
-      let entries: ts.CompletionEntry[] = getCompleteEntry(
-        '',
-        0,
-      ).map(entryItem => {
-        return {
-          name: entryItem.name,
-          insertText: entryItem.insertText,
+      prior.entries = [
+        { name: 'suggests',
+          insertText: '/suggests/:adminId?',
           kind: ts.ScriptElementKind.keyword,
-          kindModifiers: 'esClient',
-          sortText: '0',
-        };
-      });
-      prior.entries = entries.concat(prior.entries);
+          kindModifiers: '',
+          sortText: '0' },
+        { name: 'search',
+          insertText: '/search/:adminId?',
+          kind: ts.ScriptElementKind.keyword,
+          kindModifiers: '',
+          sortText: '0' },
+        { name: 'spu_search',
+          insertText: '/spu_search/:adminId?',
+          kind: ts.ScriptElementKind.keyword,
+          kindModifiers: '',
+          sortText: '0' },
+        { name: 'search',
+          insertText: '/search/:adminId?',
+          kind: ts.ScriptElementKind.keyword,
+          kindModifiers: '',
+          sortText: '0' },
+        {"name":"suggests","insertText":"/suggests/:adminId","kind":ts.ScriptElementKind.keyword,"kindModifiers":"","sortText":"0"},
+      ];
 
       info.project.projectService.logger.info(
         `esClient: getCompletionsAtPosition 返回值 ${JSON.stringify(prior)}`,
