@@ -35,8 +35,7 @@ export function getCompleteEntry(
     searchTypeItem.begin.startsWith(urlAst.begin)
   );
 
-
-  console.log(`position:${JSON.stringify(position)},urlAst:${JSON.stringify(urlAst)},hitTypes.length:${hitTypes.length},offset:${offset}`);
+  // console.log(`position:${JSON.stringify(position)},urlAst:${JSON.stringify(urlAst)},hitTypes.length:${hitTypes.length},offset:${offset}`);
   if(position.type === 'begin') {
     if(hitTypes.length>0) {
       return hitTypes.map(typeItem => {
