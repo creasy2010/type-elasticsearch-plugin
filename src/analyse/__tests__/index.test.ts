@@ -7,7 +7,7 @@
  * @Date    2018/6/20
  **/
 import {getCompleteEntry} from '../index';
-
+//
 it('空字符串时给出提示',async ()=>{
   let result  = getCompleteEntry(" ",1);
   expect(result).toMatchSnapshot("空字符串时给出提示");
@@ -25,4 +25,8 @@ it('标准查询参数',async ()=>{
   expect(getCompleteEntry("/",1))
     .toMatchSnapshot("开头查询");
 
+
+  expect(getCompleteEntry("/aggregations/Axxxx?",20))
+    .toMatchSnapshot("搜索关键字提示");
 })
+

@@ -31,10 +31,14 @@ export interface IUrlContent {
 export function parseContent(content: string = ""): IUrlContent {
 
   let temp = content.split('?');
-  let begin = "/"+(temp[0].split("/")[1]|| "");
+
+  let begin = (temp[0].split("/")[1]|| "");
+  if(begin) {
+    begin ="/"+begin;
+  }
   let beginText= temp[0];
   let params = [];
-  let beginIndexZone = {start: 0, end: begin.length};
+  let beginIndexZone = {start: 0, end: beginText.length};
 
   if (temp[1]) {
     let _temp = beginIndexZone.end + 1;
@@ -42,7 +46,7 @@ export function parseContent(content: string = ""): IUrlContent {
       temp = paramItem.split('=');
 
       let keyIndex = {start: _temp, end: _temp + temp[0].length};
-      let valueIndex = {start: keyIndex.end + 1, end: keyIndex.end + 1 + temp[1].length}
+      let valueIndex = {start: keyIndex.end + 1, end: keyIndex.end + 1 + (temp[1]?temp[1].length:0)}
       params.push({
         name: temp[1],
         keyIndex,
@@ -68,6 +72,11 @@ export interface IPosition {
 
 export function getPosition(urlContent:IUrlContent,offset:number):IPosition{
 
+  //头部为空时.
+  if(urlContent.beginIndexZone.start === urlContent.beginIndexZone.end) {
+    return {type:"begin"}
+  }
+
   //头部类型判断
   if(urlContent.beginIndexZone.start <= offset && offset <urlContent.beginIndexZone.end){
     return {type:"begin"}
@@ -75,10 +84,16 @@ export function getPosition(urlContent:IUrlContent,offset:number):IPosition{
 
   //尾部类型判断;
 
-  let paramItem = urlContent.params.filter(paramItem=>paramItem.keyIndex.start <= offset && paramItem.valueIndex.end >offset )[0]
-  if(paramItem){
-    return {type:"param",paramItem}
-  }else{
+  if(urlContent.params.length>0) {
+    let paramItem = urlContent.params.filter(paramItem=>paramItem.keyIndex.start <= offset && paramItem.valueIndex.end >offset )[0]
+    if(paramItem) {
+      return {type:"param",paramItem}
+    }else{
+      return {type:"param"}
+    }
+  }else if(offset > urlContent.beginIndexZone.end) {
+    return {type:"param"}
+  }else {
     return {type:"begin"}
   }
 }

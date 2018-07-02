@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`切割内容 1`] = `
+Object {
+  "begin": "/products",
+  "beginIndexZone": Object {
+    "end": 17,
+    "start": 0,
+  },
+  "beginText": "/products/A967550",
+  "params": Array [
+    Object {
+      "keyIndex": Object {
+        "end": 19,
+        "start": 18,
+      },
+      "name": "apple",
+      "valueIndex": Object {
+        "end": 25,
+        "start": 20,
+      },
+    },
+    Object {
+      "keyIndex": Object {
+        "end": 30,
+        "start": 26,
+      },
+      "name": "0",
+      "valueIndex": Object {
+        "end": 32,
+        "start": 31,
+      },
+    },
+    Object {
+      "keyIndex": Object {
+        "end": 37,
+        "start": 33,
+      },
+      "name": "2",
+      "valueIndex": Object {
+        "end": 39,
+        "start": 38,
+      },
+    },
+  ],
+}
+`;
