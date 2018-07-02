@@ -36,6 +36,7 @@ export = (modules: {typescript: typeof ts_module}) => {
     }
 
     proxy.getCompletionsAtPosition = (fileName, position) => {
+      let flag  = '444444';
       info.project.projectService.logger.info(
         `esClient: getCompletionsAtPosition ${fileName} ,  ${position}`,
       );
@@ -44,51 +45,55 @@ export = (modules: {typescript: typeof ts_module}) => {
         position,
         undefined,
       );
-      //
-      // let entries: ts.CompletionEntry[] = getCompleteEntry(
-      //   '',
-      //   0,
-      // ).filter(entryItem=>{
-      //   let ok=['suggests','search','spu_search'];
-      //   return ok.includes( entryItem.name)
-      // }).map(entryItem => {
-      //   return {
-      //     name: entryItem.name,
-      //     insertText: entryItem.insertText,
+
+      //下面这段,即使执行了, 没有用 也会导致没有提示..
+
+      let start = Date.now();
+      let entries: ts.CompletionEntry[] = getCompleteEntry(
+        '',
+        0,
+      ).map(entryItem => {
+        return {
+          name: entryItem.name,
+          insertText: entryItem.insertText,
+          kind: ts.ScriptElementKind.keyword,
+          kindModifiers: '',
+          sortText: '0',
+        };
+      });
+
+      let end  = Date.now();
+      info.project.projectService.logger.info(
+        `esClient: getCompletionsAtPosition ${flag} elapse: ${end-start}ms,entries::${JSON.stringify(entries)}`,
+      );
+
+      prior.entries = entries;
+      // prior.entries = [
+      //   { name: 'suggests',
+      //     insertText: '/suggests/:adminId?',
       //     kind: ts.ScriptElementKind.keyword,
       //     kindModifiers: '',
-      //     sortText: '0',
-      //   };
-      // });
-      //
-      // prior.entries = entries;
-
-      prior.entries = [
-        { name: 'suggests',
-          insertText: '/suggests/:adminId?',
-          kind: ts.ScriptElementKind.keyword,
-          kindModifiers: '',
-          sortText: '0' },
-        { name: 'search',
-          insertText: '/search/:adminId?',
-          kind: ts.ScriptElementKind.keyword,
-          kindModifiers: '',
-          sortText: '0' },
-        { name: 'spu_search',
-          insertText: '/spu_search/:adminId?',
-          kind: ts.ScriptElementKind.keyword,
-          kindModifiers: '',
-          sortText: '0' },
-        { name: 'search',
-          insertText: '/search/:adminId?',
-          kind: ts.ScriptElementKind.keyword,
-          kindModifiers: '',
-          sortText: '0' },
-        {"name":"suggests","insertText":"/suggests/:adminId","kind":ts.ScriptElementKind.keyword,"kindModifiers":"","sortText":"0"},
-      ];
+      //     sortText: '0' },
+      //   { name: 'search',
+      //     insertText: '/search/:adminId?',
+      //     kind: ts.ScriptElementKind.keyword,
+      //     kindModifiers: '',
+      //     sortText: '0' },
+      //   { name: 'spu_search',
+      //     insertText: '/spu_search/:adminId?',
+      //     kind: ts.ScriptElementKind.keyword,
+      //     kindModifiers: '',
+      //     sortText: '0' },
+      //   { name: 'search',
+      //     insertText: '/search/:adminId?',
+      //     kind: ts.ScriptElementKind.keyword,
+      //     kindModifiers: '',
+      //     sortText: '0' },
+      //   {"name":"suggests","insertText":"/suggests/:adminId","kind":ts.ScriptElementKind.keyword,"kindModifiers":"","sortText":"0"},
+      // ];
 
       info.project.projectService.logger.info(
-        `esClient: getCompletionsAtPosition 返回值 ${JSON.stringify(prior)}`,
+        `esClient: getCompletionsAtPosition ${flag} ${JSON.stringify(prior)}`,
       );
       return prior;
     };
