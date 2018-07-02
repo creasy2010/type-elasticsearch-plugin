@@ -26,7 +26,7 @@ export = (mod: { typescript: typeof ts }) => {
         {
           logger: {
             log: msg => {
-              console.log(msg);
+              // console.log(msg);
               // info.project.projectService.logger.info('esClient:****'+msg);
             }
           }
