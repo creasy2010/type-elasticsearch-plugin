@@ -1,5 +1,5 @@
 //子类型处理的不好. TODO  类型表示 也不够好, 自定义类型, 看看typescript是否可以做到
-enum ValueTypeEnum {
+export enum ValueTypeEnum {
   string, //""
   int,
   boolean,
@@ -8,14 +8,14 @@ enum ValueTypeEnum {
   mapStr, //stock:1;price:0
 }
 
-interface ISearchParamRule {
+export interface ISearchParamRule {
   name: string; //标识 , q
   type: ValueTypeEnum; // 值类型;
   isRequire: boolean; //是否必填;
   comment: string; //备注;
 }
 
-interface ISearchType {
+export  interface ISearchType {
   begin: string; //以什么开头
   beginReplace: string; //用什么替换;
   searchParamsRule: ISearchParamRule[];
@@ -23,7 +23,7 @@ interface ISearchType {
   requiredParams?:ISearchParamRule[]//必传的参数名称; 动态计算
 }
 
-enum FormatEnum {
+export enum FormatEnum {
   json = 'json',
   xml = 'xml',
   yaml = 'yaml',
