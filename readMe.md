@@ -32,16 +32,16 @@ just try it !
 ### 调用实例:
 ```txt
 
-http://192.168.65.222:18082/products/A967550?q=apple&from=0&size=2
-http://192.168.65.222:18082/aggregations/A967550?q=apple&cats=b2c,设备耗材,数码通讯类,电脑/电脑周边
-http://192.168.65.222:18082/search/A967550?q=apple&cats=b2c,设备耗材,数码通讯类,电脑/电脑周边&size=1&res=products,aggregations
-http://192.168.65.222:18082/suggests/A967550?q=ap
+http://192.168.XX.XX:18082/products/A967550?q=apple&from=0&size=2
+http://192.168.XX.XX:18082/aggregations/A967550?q=apple&cats=b2c,设备耗材,数码通讯类,电脑/电脑周边
+http://192.168.XX.XX:18082/search/A967550?q=apple&cats=b2c,设备耗材,数码通讯类,电脑/电脑周边&size=1&res=products,aggregations
+http://192.168.XX.XX:18082/suggests/A967550?q=ap
 http://127.0.0.1:8001/products/sptest?q=华为手机&ex_fields=spuId,skuId,title,salePrice&ex_script_field_doublePrice=doc[salePrice].value*2
-http://192.168.65.222:18082/products/A967550?ex_q_skuId=bterms(g781407,g642997)
-http://192.168.65.222:18082/products/A967550?ex_q_productLine=size_terms(value:1,2)
-http://192.168.65.222:18082/products/A967550?ex_q_ids=ids(g781407,g642997)
-http://192.168.65.222:18082/aggregations/A967550?q=酒&ex_section_salePrice=section(size:6,optimize:false)
-http://192.168.65.222:18082/products/A967550?q=苹果&ex_body_type=count
+http://192.168.XX.XX:18082/products/A967550?ex_q_skuId=bterms(g781407,g642997)
+http://192.168.XX.XX:18082/products/A967550?ex_q_productLine=size_terms(value:1,2)
+http://192.168.XX.XX:18082/products/A967550?ex_q_ids=ids(g781407,g642997)
+http://192.168.XX.XX:18082/aggregations/A967550?q=酒&ex_section_salePrice=section(size:6,optimize:false)
+http://192.168.XX.XX:18082/products/A967550?q=苹果&ex_body_type=count
 
 #线上查询 fromlogserver
 search/A2445267?ex_section_salePrice=section(size:6,optimize:false)&ex_q_D2COnSale=bterms(true)&ex_agg_cats=cats(depth:3)&props_agg_ignore_cat=true&ex_q_itemType=bterms(1,2,5)&ex_q_or=or(query:<ex_q_spuId=bterms(11334277,4375188,11334266,4375565,11334276,4375447,4375812,11334292,11334373,4375868)>|<ex_q_sourceSpuId=bterms(11334277,4375188,11334266,4375565,11334276,4375447,4375812,11334292,11334373,4375868)>)&ex_q_d2cBlockedLevels=null(flag:true)&ex_agg_d2cLabel=terms(size:0)&ownerFilter=0&from=0&size=200&sort=price:1
