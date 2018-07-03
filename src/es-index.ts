@@ -8,31 +8,31 @@
  **/
 
 import ts from 'typescript/lib/tsserverlibrary';
-import { getCompleteEntry } from './analyse';
+import {getCompleteEntry, getQuickInfo} from './analyse';
 import {
   TemplateLanguageService,
   TemplateContext,
-  decorateWithTemplateLanguageService
+  decorateWithTemplateLanguageService,
 } from 'typescript-template-language-service-decorator';
 
-export = (mod: { typescript: typeof ts }) => {
+export = (mod: {typescript: typeof ts}) => {
   return {
     create(info: ts.server.PluginCreateInfo): ts.LanguageService {
       return decorateWithTemplateLanguageService(
         mod.typescript,
         info.languageService,
         new EchoTemplateLanguageService(info),
-        { tags: ['esClient'] },
+        {tags: ['esClient']},
         {
           logger: {
             log: msg => {
               // console.log(msg);
               // info.project.projectService.logger.info('esClient:****'+msg);
-            }
-          }
-        }
+            },
+          },
+        },
       );
-    }
+    },
   };
 };
 
@@ -55,33 +55,82 @@ class EchoTemplateLanguageService implements TemplateLanguageService {
     this._info.project.projectService.logger.info('esClient:' + string);
   }
 
+  getQuickInfoAtPosition?(
+    context: TemplateContext,
+    position: ts.LineAndCharacter,
+  ): ts.QuickInfo | undefined {
+
+    let comment = getQuickInfo(context.text, context.toOffset(position));
+    this.log(
+      `getQuickInfoAtPosition:: 4444 request comment:${JSON.stringify(
+        comment,
+      )}:position:${position}, context:${context.text}`,
+    );
+    if(comment){
+      return {
+        kind: ts.ScriptElementKind.unknown,
+        kindModifiers: '',
+        textSpan: {
+          start: comment.start,
+          length: comment.end - comment.start,
+        },
+        displayParts: [
+          {
+            text: 'displayParts1111',
+            kind: 'displayParts11111',
+          },
+        ],
+        documentation: [
+          {
+            text: 'documentation1111',
+            kind: 'documentation11111',
+          },
+        ],
+        tags: [
+          {
+            name: 'tags:name',
+            text: 'tags:12ewre',
+          },
+        ],
+      };
+    }else{
+      return ;
+    }
+
+  }
+
   getCompletionsAtPosition(
     context: TemplateContext,
-    position: ts.LineAndCharacter
+    position: ts.LineAndCharacter,
   ): ts.CompletionInfo {
-    this.log(`getCompletionsAtPosition:: 4444 request position:${JSON.stringify(position)} offSet:${context.toOffset(position)} content:${context.text}  --- `);
+    this.log(
+      `getCompletionsAtPosition:: 4444 request position:${JSON.stringify(
+        position,
+      )} offSet:${context.toOffset(position)} content:${context.text}`,
+    );
 
     let entries: ts.CompletionEntry[] = getCompleteEntry(
       context.text,
-      context.toOffset(position)
+      context.toOffset(position),
     ).map(entryItem => {
       return {
         name: entryItem.name,
         insertText: entryItem.insertText,
         kind: ts.ScriptElementKind.keyword,
         kindModifiers: 'esClient',
-        sortText: '0'
+        sortText: '0',
       };
     });
 
-
-    this.log(`getCompletionsAtPosition  4444 response:${JSON.stringify(entries)}`);
+    this.log(
+      `getCompletionsAtPosition  4444 response:${JSON.stringify(entries)}`,
+    );
 
     return {
       isGlobalCompletion: false,
       isMemberCompletion: false,
       isNewIdentifierLocation: false,
-      entries
+      entries,
     };
   }
 }
