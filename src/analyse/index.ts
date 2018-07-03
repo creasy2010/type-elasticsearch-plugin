@@ -7,13 +7,53 @@
  * @Date    2018/6/20
  **/
 
-import {types} from './search-type';
+import {ISearchParamRule, types} from './search-type';
 import {parseContent, getPosition, IPosition} from "./util";
 
 export interface ICompletionEntry {
   name: string;
   insertText: string;
   comment?: string;
+}
+
+export interface ITipEntry{
+  comment:string;
+  start:number;
+  end:number;
+}
+
+export function getQuickInfo(
+  content: string,
+  offset: number):ITipEntry{
+
+  let result: ICompletionEntry[] = [];
+  let urlAst = parseContent(content.trim());
+  let position:IPosition = getPosition(urlAst,offset);
+
+  //判断 是什么类型的
+  let hitTypes = types.filter(searchTypeItem =>
+    searchTypeItem.begin.startsWith(urlAst.begin)
+  );
+
+  if(hitTypes.length >0) {
+      if(position.type==='begin') {
+        return Object.assign({},urlAst.beginIndexZone,{comment:hitTypes[0].comment})
+      } else {
+        if(position.paramItem.keyIndex.start <offset   && offset>position.paramItem.valueIndex.end){
+
+          let hitRule:ISearchParamRule =null;
+          hitTypes[0].searchParamsRule.forEach(item=>{
+            if(item.name === position.paramItem.name){
+              hitRule= item;
+            }
+          });
+          return Object.assign({},position.paramItem.keyIndex,{comment:hitRule.comment})
+        }
+      }
+  }else{
+    return ;
+  }
+
 }
 
 /**

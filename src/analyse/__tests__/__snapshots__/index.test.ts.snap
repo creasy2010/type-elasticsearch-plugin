@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`quickInfo 1`] = `
+Object {
+  "comment": "根据查询条件查询SKU，但是结果聚合成SPU的方式",
+  "end": 17,
+  "start": 0,
+}
+`;
+
+exports[`quickInfo 2`] = `undefined`;
+
 exports[`开头查询 1`] = `
 Array [
   Object {
