@@ -26,7 +26,6 @@ export function getQuickInfo(
   content: string,
   offset: number):ITipEntry{
 
-  let result: ICompletionEntry[] = [];
   let urlAst = parseContent(content.trim());
   let position:IPosition = getPosition(urlAst,offset);
 
@@ -39,8 +38,7 @@ export function getQuickInfo(
       if(position.type==='begin') {
         return Object.assign({},urlAst.beginIndexZone,{comment:hitTypes[0].comment})
       } else {
-        if(position.paramItem.keyIndex.start <offset   && offset>position.paramItem.valueIndex.end){
-
+        if(position.paramItem.keyIndex.start <= offset   && offset < position.paramItem.valueIndex.end){
           let hitRule:ISearchParamRule =null;
           hitTypes[0].searchParamsRule.forEach(item=>{
             if(item.name === position.paramItem.name){

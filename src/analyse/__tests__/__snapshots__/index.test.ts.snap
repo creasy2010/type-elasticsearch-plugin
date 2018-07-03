@@ -8,7 +8,13 @@ Object {
 }
 `;
 
-exports[`quickInfo 2`] = `undefined`;
+exports[`quickInfo 2`] = `
+Object {
+  "comment": "搜索关键词",
+  "end": 19,
+  "start": 18,
+}
+`;
 
 exports[`开头查询 1`] = `
 Array [

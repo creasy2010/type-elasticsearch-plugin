@@ -11,6 +11,7 @@
 /// q=apple& 与  cats='a,b,c' 如何区分?
 export interface IParamItem{
   name:string;
+  value:string;
   keyIndex:{start:number,end:number}
   valueIndex:{start:number,end:number};
 }
@@ -48,7 +49,8 @@ export function parseContent(content: string = ""): IUrlContent {
       let keyIndex = {start: _temp, end: _temp + temp[0].length};
       let valueIndex = {start: keyIndex.end + 1, end: keyIndex.end + 1 + (temp[1]?temp[1].length:0)}
       params.push({
-        name: temp[1],
+        name: temp[0],
+        value:temp[1],
         keyIndex,
         valueIndex
       });

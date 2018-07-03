@@ -37,7 +37,7 @@ it('quickInfo', async()=>{
   expect(getQuickInfo("/products/Axxxxxx?q=aaaa",1))
     .toMatchSnapshot("quickInfo");
 
-  expect(getQuickInfo("/products/Axxxxxx?q=aaaa",19))
+  expect(getQuickInfo("/products/Axxxxxx?q=aaaa",18))
     .toMatchSnapshot("quickInfo");
 
 });
