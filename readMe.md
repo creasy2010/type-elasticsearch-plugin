@@ -62,6 +62,9 @@ search/A1604919?res=products,aggregations&ex_agg_cats=cats(depth:3)&cats=b2b&ex_
 
 ##参考
 [es-client-JAVA](http://git.dev.qianmi.com/retail/es-client)
+
 [搜索平台查询API文档](http://gitbook.dev.qianmi.com/OF1540/search_platform_book/book/api.html)
+
 [elasticQuery](https://www.elastic.co/guide/en/elasticsearch/reference/5.2/query-dsl-match-query.html)
+
 [vscode-styled-components](https://github.com/styled-components/vscode-styled-components)
