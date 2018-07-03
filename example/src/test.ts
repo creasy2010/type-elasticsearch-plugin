@@ -16,4 +16,4 @@ export function esClient(string1) {
 // import styled from 'styled-components';
 // styled.button`1123`;
 
-let a = esClient`/aggregations/A1123123`;
+let a = esClient`/search/123123123?q=sdfsdf&cats=223123&basic=sdfsdfwer`;

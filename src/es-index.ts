@@ -66,32 +66,27 @@ class EchoTemplateLanguageService implements TemplateLanguageService {
         comment,
       )}:position:${position}, context:${context.text}`,
     );
-    if(comment){
+    if(comment) {
       return {
         kind: ts.ScriptElementKind.unknown,
-        kindModifiers: '',
+        kindModifiers: 'esClient',
         textSpan: {
           start: comment.start,
           length: comment.end - comment.start,
         },
         displayParts: [
           {
-            text: 'displayParts1111',
-            kind: 'displayParts11111',
+            text: comment.comment,
+            kind: ts.ScriptElementKind.string,
           },
         ],
         documentation: [
           {
-            text: 'documentation1111',
-            kind: 'documentation11111',
+            text: comment.comment,
+            kind: ts.ScriptElementKind.string,
           },
         ],
-        tags: [
-          {
-            name: 'tags:name',
-            text: 'tags:12ewre',
-          },
-        ],
+        tags: [],
       };
     }else{
       return ;
