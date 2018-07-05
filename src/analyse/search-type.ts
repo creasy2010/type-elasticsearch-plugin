@@ -49,7 +49,6 @@ const customQuery:ISearchParamRule[] = [
       `,
     isRequire: false,
   },
-
   {
     name: 'ex_fields',
     insertText:"ex_fields=属性1,属性2,属性3",
@@ -386,14 +385,14 @@ const basicRuels: ISearchParamRule[] = items.concat(customQuery);
 let skuSearch: ISearchType = {
   begin: '/products/',
   beginReplace: '/products/:adminId',
-  searchParamsRule: basicRuels.concat([]),
+  searchParamsRule: basicRuels,
   comment: '商品SKU查询,根据指定的查询条件返回符合条件商品，支持分页和排序。',
 };
 
 let spuSearch: ISearchType = {
   begin: '/spus/',
   beginReplace: '/spus/:adminId',
-  searchParamsRule: basicRuels.concat([]),
+  searchParamsRule: basicRuels,
   comment: '商品SPU查询,根据指定的查询条件返回符合条件商品，支持分页和排序。',
 };
 

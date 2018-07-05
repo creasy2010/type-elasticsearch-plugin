@@ -28,6 +28,9 @@ Java|node DSL => string;
 
 just try it !
 
+## 示例
+!(demo)[./demo.gif]
+
 
 ### 调用实例:
 
@@ -59,6 +62,7 @@ search/A1604919?res=products,aggregations&ex_agg_cats=cats(depth:3)&cats=b2b&ex_
 5. 只是字符串的拼装, 如果遇到拼装的处理???
 6. Snippets添加..
 7. 字符串的结构还是要用抽象语法树来表示;;
+8. 语法的姿色还要调整下.
 
 
 ##参考
