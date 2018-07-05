@@ -86,12 +86,12 @@ export function getPosition(urlContent:IUrlContent,offset:number):IPosition{
 
   //尾部类型判断;
   if(urlContent.params.length>0) {
-    let paramItem = urlContent.params.filter(paramItem=>paramItem.keyIndex.start <= offset && paramItem.keyIndex.end >offset )[0];
+    let paramItem = urlContent.params.filter(paramItem=>paramItem.keyIndex.start <= offset && paramItem.keyIndex.end > offset )[0];
     if(paramItem) {
       return {type:"param-head",paramItem}
     }
 
-    paramItem = urlContent.params.filter(paramItem=>paramItem.valueIndex.start <= offset && paramItem.valueIndex.end >offset )[0];
+    paramItem = urlContent.params.filter(paramItem=>paramItem.valueIndex.start <= offset && paramItem.valueIndex.end >= offset )[0];
 
     if(paramItem){
       return {type:"param-value",paramItem}

@@ -37,7 +37,7 @@ export enum FormatEnum {
 //自定义查询 http://gitbook.dev.qianmi.com/OF1540/search_platform_book/book/extend_query_api.html
 const customQuery:ISearchParamRule[] = [
   {
-    name: 'ex_highlight_属性名',
+    name: 'ex_highlight',
     insertText:"ex_highlight_属性名=highlight(pre_tags:<red>,post_tags:</red>,q:苹果,multi_field:title.standard)",
     type: ValueTypeEnum.other,
     comment:
@@ -71,7 +71,7 @@ const customQuery:ISearchParamRule[] = [
     isRequire: false,
   },
   {
-    name: 'ex_q_属性名',
+    name: 'ex_q',
     insertText:"ex_q_属性名=terms(值1,值2,值3)",
     type: ValueTypeEnum.other,
     comment:
@@ -253,7 +253,7 @@ const customQuery:ISearchParamRule[] = [
     isRequire: false,
   },
   {
-    name: 'ex_f_属性名',
+    name: 'ex_f',
     insertText:"ex_f_属性名=null(flag:false)",
     type: ValueTypeEnum.strWithComma,
     comment:
@@ -312,9 +312,14 @@ const customQuery:ISearchParamRule[] = [
 ];
 
 let items:ISearchParamRule[] =[
-  {name: 'q', type: ValueTypeEnum.string, comment: '搜索关键词', isRequire: false},
+  {name: 'q',
+    insertText:"q=",
+    type: ValueTypeEnum.string,
+    comment: '搜索关键词',
+    isRequire: false},
   {
     name: 'basic',
+    insertText: 'basic=',
     type: ValueTypeEnum.mapStrArray,
     comment:
       '基础查询条件，不同查询条件之间用";"分割，同一查询条件下的值支持多选，用","分割；eg:basic=brand:华为,小米;price:-1000,1500-2500,4000-',
@@ -322,30 +327,35 @@ let items:ISearchParamRule[] =[
   },
   {
     name: 'cats',
+    insertText: 'cats=',
     type: ValueTypeEnum.strWithComma,
     comment: '商品类目路径，格式为："b2c,手机,手机数码"',
     isRequire: false,
   },
   {
     name: 'prop',
+    insertText: 'prop=',
     type: ValueTypeEnum.mapStrArray,
     comment: '商品属性，格式同basic参数，为： "网络:移动4g,联通4g;颜色:白色,黑色"',
     isRequire: false,
   },
   {
     name: 'from',
+    insertText: 'from=',
     type: ValueTypeEnum.int,
     comment: '起始条数，非分页数，默认为0，最大为6000',
     isRequire: false,
   },
   {
     name: 'size',
+    insertText: 'size=',
     type: ValueTypeEnum.int,
     comment: '查询条数，默认为60，最大为200',
     isRequire: false,
   },
   {
     name: 'sort',
+    insertText: 'sort=',
     type: ValueTypeEnum.mapStr,
     comment:
       '对搜索结果进行排序，可不填，默认值为匹配得分降序，即_score:0。1表示升序、0表示降序，支持多个排序字段。格式为："stock:1;price:0"，表示首先按照库存升序，然后按照价格降序对搜索结果进行排序',
@@ -353,12 +363,14 @@ let items:ISearchParamRule[] =[
   },
   {
     name: 'format',
+    insertText: 'format=',
     type: ValueTypeEnum.string,
     comment: '返回数据的格式，支持json、xml、yaml，默认json；也可以在HTTP header accept参数中指定返回消息格式',
     isRequire: false,
   },
   {
     name: 'ownerFilter',
+    insertText: 'ownerFilter=',
     type: ValueTypeEnum.int,
     comment: '用于开启或关闭自营商品查询过滤，为1表示仅查询自营商品，为0表示查询所有的商品，默认值为1',
     isRequire: false,
@@ -403,6 +415,7 @@ let sku4spuSearch: ISearchType = {
 const skuAggRule = basicRuels.concat([
   {
     name: 'props_agg_ignore_cat',
+    insertText: 'props_agg_ignore_cat=',
     type: ValueTypeEnum.boolean,
     comment: '是否忽略类目的限制，默认只有到最小类目才会聚合属性，如果为true的话表示不限制',
     isRequire: false,

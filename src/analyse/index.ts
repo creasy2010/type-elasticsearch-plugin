@@ -75,7 +75,7 @@ export function getCompleteEntry(
 
   // console.log(`position:${JSON.stringify(position)},urlAst:${JSON.stringify(urlAst)},hitTypes.length:${hitTypes.length},offset:${offset}`);
 
-  if(hitTypes.length===0){
+  if(hitTypes.length===0) {
     //内容对不上时 全部返回. ;;
     return types.map(typeItem => {
       return {
@@ -104,7 +104,7 @@ export function getCompleteEntry(
           if (!storedName.includes(ruleItem.name)) {
             result.push({
               name: ruleItem.name,
-              insertText: ruleItem.name + '=',
+              insertText: ruleItem.insertText,
               comment: ruleItem.comment
             });
             storedName.push(ruleItem.name);
@@ -121,13 +121,15 @@ export function getCompleteEntry(
       for (var j = 0, jLen = hitType.searchParamsRule.length; j < jLen; j++) {
         var searchParamsRuleElement = hitType.searchParamsRule[j];
 
-       return searchParamsRuleElement.valueRules.map(valueRule=>{
-          return {
-            name: valueRule.name,
-                    insertText: valueRule.insertText,
-                    comment: valueRule.comment
-          }
-        });
+        if(position.paramItem.name.startsWith(searchParamsRuleElement.name)) {
+          return (searchParamsRuleElement.valueRules||[]).map(valueRule=>{
+            return {
+              name: valueRule.name,
+              insertText: valueRule.insertText,
+              comment: valueRule.comment
+            }
+          });
+        }
       }
     }
   }

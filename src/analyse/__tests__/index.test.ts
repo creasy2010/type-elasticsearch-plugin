@@ -30,6 +30,11 @@ it('标准查询参数',async ()=>{
     .toMatchSnapshot("搜索关键字提示");
 })
 
+it('参数代码提示-自定义查询ex_q',async()=>{
+
+  expect(getCompleteEntry("/products/Axxxxxx?ex_q_test=",28))
+    .toMatchSnapshot("参数代码提示-自定义查询ex_q");
+});
 
 
 it('quickInfo', async()=>{

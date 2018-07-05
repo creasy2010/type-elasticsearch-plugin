@@ -16,6 +16,164 @@ Object {
 }
 `;
 
+exports[`参数代码提示-自定义查询ex_q 1`] = `
+Array [
+  Object {
+    "comment": "terms:terms(值1,值2,值3)支持多个值，值之间用\\",\\"分隔，多个值之间是or关系,建议使用bterms;",
+    "insertText": "terms(值1,值2,值3)",
+    "name": "terms",
+  },
+  Object {
+    "comment": "bterms(值1,值2,值3):支持多个值，值之间用\\",\\"分隔，多个值之间是or关系，null用\\"\\\\null\\\\\\"表示;",
+    "insertText": "bterms(值1,值2,值3)",
+    "name": "bterms",
+  },
+  Object {
+    "comment": "size_terms(value:值1,值2,值3;size:0):对数组或者list字段来说，terms查询多个值之间是or关系，只要数组中的值满足一个查询值即满足查询请求。size_terms可以指定匹配值的个数，字段必须满足匹配数才算满足查询条件。
+以商品为例：商品中的productLine(产品线)是array字段，值1：云商城，2：云订货，3：云小店，4：云供货，一个商品可以属于多个产品线",
+    "insertText": "size_terms(value:值1,值2,值3;size:0)",
+    "name": "size_terms",
+  },
+  Object {
+    "comment": "range(-200,500-1200,3333-):range查询根据指定的区间对文档进行查询，range查询只能作用于数值，支持多个区间，多个区间之间是or关系。区间采用左闭右开的原则。 比如查询商品销售价格在[200, 500)和[3000, ⑅)范围的商品就可以用range查询,range(-200,500-1200,3333-)",
+    "insertText": "range(-200,500-1200,3333-)",
+    "name": "range",
+  },
+  Object {
+    "comment": "match(值):用match查询给定值，在遇到数字，日期，布尔值或者not_analyzed的字符串时，都返回和给定值相同的文档，等同于sql的\\"=\\"",
+    "insertText": "match(值)",
+    "name": "match(值)",
+  },
+  Object {
+    "comment": "multi_match():multi_match查询允许在match查询的基础上同时搜索多个字段，即将相同的match查询作用在多个字段上，可以指定多个字段之间的逻辑关系，如果关系为and，则要所有字段都匹配，如果关系为or，只要有一个字段符合即可",
+    "insertText": "multi_match()(值)",
+    "name": "multi_match()",
+  },
+  Object {
+    "comment": "ematch:extend match(扩展match， ematch)允许在match查询的基础上设置查询值分词后的结果的逻辑关系。如果关系为and，则要所有词条都匹配，如果关系为or，只要有一个词条匹配即可",
+    "insertText": "ematch()",
+    "name": "ematch",
+  },
+  Object {
+    "comment": "query[string]:要查询的值;
+        default_operator[string]:词条匹配结果的逻辑计算方式，可选值：and、or；默认值or;
+        minimum_should_match[int]:多个词条的匹配数目，当operator为or是生效，默认值为1
+        analyzer[string]:分词器，一般使用千米自定义分词器qm_standard
+        ",
+    "insertText": "query_string(query:华为手机;minimum_should_match:2;default_operator:or;analyzer:qm_standard)",
+    "name": "query_string",
+  },
+  Object {
+    "comment": "more_like_this查询可以获取和所提供的文本相似的文档，可以通过具体的参数调整文本相似度。支持对多个字段进行查询。
+          like_text[string]:文档要比较的内容;
+          default_operator[string]:词条匹配结果的逻辑计算方式，可选值：and、or；默认值or;
+          minimum_should_match[int]:多个词条的匹配数目，当operator为or是生效，默认值为1;
+          analyzer[string]:分词器，一般使用千米自定义分词器qm_standard;
+        ",
+    "insertText": "more_like_this(like_text:华为手机;analyzer:qm_standard)",
+    "name": "more_like_this",
+  },
+  Object {
+    "comment": "prefix查询(前缀查询)可以获取某个字段以给定的前缀开始的文档。例如，想查询所有titile字段以\\"苹果\\"开始的文档就可以使用prefix查询。
+                 prefix查询的字段必须是没有分词的字段(not analyzed).
+                 
+                 prefix[string]:文档字段要查询的前缀
+                 boost[double]:得分权重，可不填，默认为1.0
+                 rewrite[string]:查询重写属性，可选值：constant_score_auto、constant_score_boolean、constant_score_filter、scoring_boolean、top_terms_N、top_terms_boost_N，默认为 constant_score_auto
+        ",
+    "insertText": "prefix(prefix:华为手机;boost:1.0;rewrite:constant_score_auto)",
+    "name": "prefix",
+  },
+  Object {
+    "comment": "regexp查询(正则表达式查询)可以查询某个字段是否符合给定的正则表达式，正则表达式查询属于非常消耗资源的查询，原则上不允许业务使用
+        value[string]:要匹配的正则表达式
+        boost[double]:得分权重，默认为1.0
+        flags[string]:默认值为 ALL
+        max_determinized_states[int]:默认值为 10000
+        ",
+    "insertText": "regexp(value:.+手机;boost:1.0;flags:ALL;max_determinized_states:10000)",
+    "name": "regexp",
+  },
+  Object {
+    "comment": "wildcard查询(通配符查询)类似于terms查询，不过支持通配符\\"*\\"(任意字符)、\\"?\\"(单个字符)查询，语法和功能上类似于SQL中的like查询，部分wildcard查询属于非常消耗资源的查询，需要慎用。",
+    "insertText": "wildcard(value:*手机;boost:1.0)",
+    "name": "wildcard",
+  },
+  Object {
+    "comment": "
+              参数名	数据类型	可需	描述
+              属性名	string	必填	要进行查询的字段
+              value	string	必填	要查询的值
+              end	int	必填	字段前几个词条参与匹配
+              boost	double	选填	得分权重，可不填，默认为1.0
+        ",
+    "insertText": "span_first(value:手机;end:5;boost:1.0)",
+    "name": "span_first",
+  },
+  Object {
+    "comment": "span_near查询也属于跨度查询，可以在有多个其它跨度彼此接近时对文档进行检索，该查询也是一个能够将其它跨度查询包装起来的复合查询。比如我们可以使用span_near查询\\"手机\\"词条附近有\\"6s\\"词条的文档。
+                  属性名	string	必填	要进行查询的字段
+                  value	string	必填	要查询的值
+                  slot	int	必填	跨度之间允许的其它词条数
+                  boost	double	选填	得分权重，可不填，默认为1.0
+        ",
+    "insertText": "span_near(value:手机,6s;slot:1;boost:1.0)",
+    "name": "span_near",
+  },
+  Object {
+    "comment": "stock库存查询主要是查询商品库存，支持区域库存和库存范围查询。
+        参数名	数据类型	可需	描述
+        属性名	string	必填	要进行查询的字段
+        range	string	必填	要查询的库存区间，有货的话用\\"1-\\"即可
+        region	string	选填	区域库存，如果不填的话表示全局库存
+        field	string	选填	存放库存数目的字段名称，默认值为\\"stock\\"
+        ",
+    "insertText": "stock(range:-10,20-60,70-;region:nanjing,field:stock)",
+    "name": "stock",
+  },
+  Object {
+    "comment": "nested查询用于对字段是嵌套类型的文档的查询。商品的类目是嵌套类型，要对类目进行查询就必须要用nested查询
+                参数名	数据类型	可需	描述
+                属性名	string	必填	要进行查询的字段
+                query	string	必填	存放嵌套查询的实体子查询
+                field	string	必填	路径名，如果中间有多层路径则放在path中,用\\"	
+        ",
+    "insertText": "nested(field:a|b;query:<嵌套实体子查询>)",
+    "name": "nested",
+  },
+  Object {
+    "comment": "date_range查询根据指定的区间对文档进行查询，date_range查询只能作用于日期字段，支持多个区间，多个区间之间是or关系。区间采用左闭右开的原则。
+        参数名	数据类型	可需	描述
+        属性名	string	必填	要进行查询的字段，该字段必须是date类型
+        范围	string	必填	支持多个区间，区间之间用\\",\\"分隔，区间之间是or关系。区间左闭右开，格式为\\"2016-10-13T18:07:44+0800--\\"、\\"2016-10-13--2016-10-15T18:07:44\\" 、\\"2016-06-13--\\"，区间上下边界之间用\\"--\\"分隔，时间的格式支持：\\"2016-10-13\\" \\"2016-10-13T18:07:44\\" \\"2016-10-13T18:07:44+0800\\" \\"now\\"
+",
+    "insertText": "date_range(--2016-10-13T18:07:44+0800,2016-10-13--2016-10-15T18:07:44,2016-06-13--)",
+    "name": "date_range",
+  },
+  Object {
+    "comment": "not查询用于对查询取反。比如查询商品标题中不含有\\"苹果\\"时就可以对标题含有苹果的查询取反。
+        参数名	数据类型	可需	描述
+        query	string	必填	存放not查询的实体查询，支持多个子查询，子查询之间用\\"Ι\\"分隔
+        ",
+    "insertText": "not(query:<子查询1>|<子查询2>)",
+    "name": "not",
+  },
+  Object {
+    "comment": "null过滤用于查询字段是否为null。null过滤属于filter，查询结果不会对得分和聚合产生影响。
+          根据user字段查询：
+          
+          返回true的情况：{ \\"user\\": \\"jane\\" }、{ \\"user\\": \\"\\" }、 { \\"user\\": \\"-\\" } 、{ \\"user\\": [\\"jane\\"] } 、{ \\"user\\": [\\"jane\\", null ] }
+          返回false的情况：{ \\"user\\": null }、{ \\"user\\": [] }、 { \\"user\\": [null] }、 { \\"foo\\": \\"bar\\" }
+          参数名	数据类型	可需	描述
+          属性名	string	必填	要进行查询的字段
+          flag	bool	选填	主要是决定是null还是not null， true表示是null查询；false表示not null查询。默认为false
+        ",
+    "insertText": "null(flag:false)",
+    "name": "null",
+  },
+]
+`;
+
 exports[`开头查询 1`] = `
 Array [
   Object {
@@ -120,13 +278,13 @@ Array [
        q:需要高亮的关键词，一般不填，默认为查询关键词
        multi_field:针对一个属性对应搜索平台多个字段，搜索平台无法自动匹配，这时需要手工选择一个字段。目前商品标题就是这种情况，如果是标题高亮的话需要将该字段设为\\"title.standard\\"
       ",
-    "insertText": "ex_highlight_属性名=",
-    "name": "ex_highlight_属性名",
+    "insertText": "ex_highlight_属性名=highlight(pre_tags:<red>,post_tags:</red>,q:苹果,multi_field:title.standard)",
+    "name": "ex_highlight",
   },
   Object {
     "comment": "属性名:需要查询的属性，支持多个属性，属性之间用\\",\\"分隔。只会返回文档中实际存在的字段，即字段如果有错误或者不存在，可以正常返回。
       ",
-    "insertText": "ex_fields=",
+    "insertText": "ex_fields=属性1,属性2,属性3",
     "name": "ex_fields",
   },
   Object {
@@ -134,25 +292,25 @@ Array [
       动态脚本:doc表示整个文档，可以通过doc.salePrice或者doc[salePrice]的方式访问文档salePrice属性，属性.value表示属性的值
             eg: pow(doc.salePrice.value,2),doc.salePrice.value-doc.costPrice.value =doc[salePrice].value-doc[costPrice].value
       ",
-    "insertText": "ex_script_field_动态属性名=",
+    "insertText": "ex_script_field_动态属性名=doc[salePrice].value-doc[costPrice].value",
     "name": "ex_script_field_动态属性名",
   },
   Object {
     "comment": "属性名:要进行查询的字段
       ",
-    "insertText": "ex_q_属性名=",
-    "name": "ex_q_属性名",
+    "insertText": "ex_q_属性名=terms(值1,值2,值3)",
+    "name": "ex_q",
   },
   Object {
     "comment": "存放or查询的实体查询，支持多个子查询，子查询之间用\\"Ι\\"分隔
       ",
-    "insertText": "ex_q_or=",
+    "insertText": "ex_q_or=or(query:<子查询1>|<子查询2>)",
     "name": "ex_q_or",
   },
   Object {
     "comment": "null过滤用于查询字段是否为null。null过滤属于filter，查询结果不会对得分和聚合产生影响。根据user字段查询：
       ",
-    "insertText": "ex_q_not=",
+    "insertText": "ex_q_not=not(query:<子查询1>|<子查询2>)",
     "name": "ex_q_not",
   },
   Object {
@@ -161,15 +319,15 @@ Array [
        geo_distance_range:geo_distance过滤针对地理坐标类型字段，可以查询距离指定坐标在指定范围内的文档。
        geo_bounding_box:geo_bounding_box过滤针对地理坐标类型字段，可以查询坐标在指定的矩形区域内的文档。
       ",
-    "insertText": "ex_f_属性名=",
-    "name": "ex_f_属性名",
+    "insertText": "ex_f_属性名=null(flag:false)",
+    "name": "ex_f",
   },
   Object {
     "comment": "属性名:动态属性，返回的值就放在这个属性中
       动态脚本:doc表示整个文档，可以通过doc.salePrice或者doc[salePrice]的方式访问文档salePrice属性，属性.value表示属性的值
             eg: pow(doc.salePrice.value,2),doc.salePrice.value-doc.costPrice.value =doc[salePrice].value-doc[costPrice].value
       ",
-    "insertText": "ex_q_ids=",
+    "insertText": "ex_q_ids=ids(ID值1,ID值2,ID值3)",
     "name": "ex_q_ids",
   },
   Object {
