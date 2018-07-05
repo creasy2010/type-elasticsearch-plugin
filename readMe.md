@@ -29,7 +29,7 @@ Java|node DSL => string;
 just try it !
 
 ## 示例
-!(demo)[./demo.gif]
+![demo](demo.gif)
 
 
 ### 调用实例:
