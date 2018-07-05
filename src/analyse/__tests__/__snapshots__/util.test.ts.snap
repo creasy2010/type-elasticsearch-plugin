@@ -14,7 +14,8 @@ Object {
         "end": 19,
         "start": 18,
       },
-      "name": "apple",
+      "name": "q",
+      "value": "apple",
       "valueIndex": Object {
         "end": 25,
         "start": 20,
@@ -25,7 +26,8 @@ Object {
         "end": 30,
         "start": 26,
       },
-      "name": "0",
+      "name": "from",
+      "value": "0",
       "valueIndex": Object {
         "end": 32,
         "start": 31,
@@ -36,7 +38,8 @@ Object {
         "end": 37,
         "start": 33,
       },
-      "name": "2",
+      "name": "size",
+      "value": "2",
       "valueIndex": Object {
         "end": 39,
         "start": 38,

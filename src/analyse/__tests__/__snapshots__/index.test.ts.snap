@@ -114,6 +114,65 @@ Array [
     "name": "ownerFilter",
   },
   Object {
+    "comment": "属性名: 需要高亮的字段名称，返回的数据结构中该字段会高亮显示关键词
+       pre_tags:高亮词起始标签，默认值为\\"<hl>\\"
+       post_tags:高亮词结束标签，默认值为\\"</hl>\\"
+       q:需要高亮的关键词，一般不填，默认为查询关键词
+       multi_field:针对一个属性对应搜索平台多个字段，搜索平台无法自动匹配，这时需要手工选择一个字段。目前商品标题就是这种情况，如果是标题高亮的话需要将该字段设为\\"title.standard\\"
+      ",
+    "insertText": "ex_highlight_属性名=",
+    "name": "ex_highlight_属性名",
+  },
+  Object {
+    "comment": "属性名:需要查询的属性，支持多个属性，属性之间用\\",\\"分隔。只会返回文档中实际存在的字段，即字段如果有错误或者不存在，可以正常返回。
+      ",
+    "insertText": "ex_fields=",
+    "name": "ex_fields",
+  },
+  Object {
+    "comment": "属性名:动态属性，返回的值就放在这个属性中
+      动态脚本:doc表示整个文档，可以通过doc.salePrice或者doc[salePrice]的方式访问文档salePrice属性，属性.value表示属性的值
+            eg: pow(doc.salePrice.value,2),doc.salePrice.value-doc.costPrice.value =doc[salePrice].value-doc[costPrice].value
+      ",
+    "insertText": "ex_script_field_动态属性名=",
+    "name": "ex_script_field_动态属性名",
+  },
+  Object {
+    "comment": "属性名:要进行查询的字段
+      ",
+    "insertText": "ex_q_属性名=",
+    "name": "ex_q_属性名",
+  },
+  Object {
+    "comment": "存放or查询的实体查询，支持多个子查询，子查询之间用\\"Ι\\"分隔
+      ",
+    "insertText": "ex_q_or=",
+    "name": "ex_q_or",
+  },
+  Object {
+    "comment": "null过滤用于查询字段是否为null。null过滤属于filter，查询结果不会对得分和聚合产生影响。根据user字段查询：
+      ",
+    "insertText": "ex_q_not=",
+    "name": "ex_q_not",
+  },
+  Object {
+    "comment": "null:not查询用于对查询取反。比如查询商品标题中不含有\\"苹果\\"时就可以对标题含有苹果的查询取反。
+       geo_distance:geo_distance过滤针对地理坐标类型字段，可以查询距离指定坐标在指定范围内的文档。
+       geo_distance_range:geo_distance过滤针对地理坐标类型字段，可以查询距离指定坐标在指定范围内的文档。
+       geo_bounding_box:geo_bounding_box过滤针对地理坐标类型字段，可以查询坐标在指定的矩形区域内的文档。
+      ",
+    "insertText": "ex_f_属性名=",
+    "name": "ex_f_属性名",
+  },
+  Object {
+    "comment": "属性名:动态属性，返回的值就放在这个属性中
+      动态脚本:doc表示整个文档，可以通过doc.salePrice或者doc[salePrice]的方式访问文档salePrice属性，属性.value表示属性的值
+            eg: pow(doc.salePrice.value,2),doc.salePrice.value-doc.costPrice.value =doc[salePrice].value-doc[costPrice].value
+      ",
+    "insertText": "ex_q_ids=",
+    "name": "ex_q_ids",
+  },
+  Object {
     "comment": "是否忽略类目的限制，默认只有到最小类目才会聚合属性，如果为true的话表示不限制",
     "insertText": "props_agg_ignore_cat=",
     "name": "props_agg_ignore_cat",

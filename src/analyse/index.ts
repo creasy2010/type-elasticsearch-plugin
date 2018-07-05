@@ -95,7 +95,7 @@ export function getCompleteEntry(
           comment: typeItem.comment
         };
       });
-  } else if(position.type === 'param') {
+  } else if(position.type ==="param-head") {
 
       let storedName = [];
       hitTypes.forEach(searchTypeItem => {
@@ -112,7 +112,26 @@ export function getCompleteEntry(
         });
       });
 
+  }  else if(position.type ==="param-value") {
+    //寻找命中的searchParamsRule
+    //如果有子项规则, 则处理
+    for (var i = 0, iLen = hitTypes.length; i < iLen; i++) {
+      var hitType = hitTypes[i];
+
+      for (var j = 0, jLen = hitType.searchParamsRule.length; j < jLen; j++) {
+        var searchParamsRuleElement = hitType.searchParamsRule[j];
+
+       return searchParamsRuleElement.valueRules.map(valueRule=>{
+          return {
+            name: valueRule.name,
+                    insertText: valueRule.insertText,
+                    comment: valueRule.comment
+          }
+        });
+      }
+    }
   }
+
 
   return result;
 }

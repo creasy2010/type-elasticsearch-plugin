@@ -30,6 +30,7 @@ just try it !
 
 
 ### 调用实例:
+
 ```txt
 
 http://192.168.XX.XX:18082/products/A967550?q=apple&from=0&size=2
@@ -49,7 +50,6 @@ search/A1604919?res=products,aggregations&ex_agg_cats=cats(depth:3)&cats=b2b&ex_
 ```
 
 
-
 ## TODO
 
 1. ?等符号不能触发搜索
@@ -58,9 +58,11 @@ search/A1604919?res=products,aggregations&ex_agg_cats=cats(depth:3)&cats=b2b&ex_
 4. 诊断信息;
 5. 只是字符串的拼装, 如果遇到拼装的处理???
 6. Snippets添加..
+7. 字符串的结构还是要用抽象语法树来表示;;
 
 
 ##参考
+
 [es-client-JAVA](http://git.dev.qianmi.com/retail/es-client)
 
 [搜索平台查询API文档](http://gitbook.dev.qianmi.com/OF1540/search_platform_book/book/api.html)
